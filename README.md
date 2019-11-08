@@ -1,5 +1,7 @@
 # twitter-business-bot
 
+Tweets variously interesting and shit business ideas on my personal twitter account [@mcclowes](https://twitter.com/mcclowes).
+
 Check out botwiki.org/tutorials/how-to-create-a-twitter-app to see how to obtain the keys/secrets you need to authenticate and post to Twitter.
 
 # Tweet content
