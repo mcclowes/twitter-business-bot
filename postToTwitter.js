@@ -16,8 +16,7 @@ const prefix = "Red-hot business idea: "
 const randomItem = (items) => items[Math.floor(Math.random()*items.length)];
 
 const postToTwitter = async () => {
-  console.log("Creating Twitter client...");
-  const T = new Twitter(twitterConfig.twitter);
+  console.log("Fetching data...");
   
   const data = await axios
     .get(process.env.GOOGLE_SHEET_ENDPOINT)
@@ -40,6 +39,9 @@ const postToTwitter = async () => {
     
   const tweet = prefix + randomItem(twists) + ' ' + randomItem(ideas) + ' for ' + randomItem(markets) + '.';
 
+  console.log("Creating Twitter client...");
+  const T = new Twitter(twitterConfig.twitter);
+  
   console.log("\nPosting to Twitter...");
   
   console.log(tweet)
