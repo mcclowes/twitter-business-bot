@@ -1,5 +1,6 @@
-/* Twitter config */
+const generateTweet = require('./generateTweet')
 const Twitter = require("twit");
+
 const twitterConfig = {
   twitter: {
     consumer_key: process.env.CONSUMER_KEY,
@@ -9,35 +10,8 @@ const twitterConfig = {
   }
 };
 
-const axios = require('axios');
-
-const prefix = "Red-hot business idea: "
-
-const randomItem = (items) => items[Math.floor(Math.random()*items.length)];
-
 const postToTwitter = async () => {
-  console.log("Fetching data...");
-  
-  const data = await axios
-    .get(process.env.GOOGLE_SHEET_ENDPOINT)
-    .then(response => {
-      return response.data
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  
-  let twists = [] 
-  let ideas = [] 
-  let markets = [] 
-  
-  data.forEach(item=>{
-    if(item.twists) { twists.push(item.twists) }
-    if(item.ideas) { ideas.push(item.ideas) }
-    if(item.markets) { markets.push(item.markets) }
-  })
-    
-  const tweet = prefix + randomItem(twists) + ' ' + randomItem(ideas) + ' for ' + randomItem(markets) + '.';
+  const tweet = await generateTweet()
 
   console.log("Creating Twitter client...");
   const T = new Twitter(twitterConfig.twitter);
